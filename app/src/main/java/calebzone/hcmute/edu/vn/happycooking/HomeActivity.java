@@ -5,7 +5,6 @@ import android.os.Bundle;
 /*
     Happy Cooking App
     Create 31/05/2018
-    a
  */
 public class HomeActivity extends AppCompatActivity {
 
