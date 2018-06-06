@@ -5,5 +5,6 @@
     <color name="colorAccent">#ff4081</color>
     <color name="colorOrangeLight">#ffbaa1</color>
     <color name="colorOrangeHeavy">#ff3c00</color>
+    <color name="colorOrangeProcessBar">#f14e1d</color>
 
 </resources>
