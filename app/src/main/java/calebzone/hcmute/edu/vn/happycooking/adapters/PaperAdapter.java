@@ -1,5 +1,6 @@
 package calebzone.hcmute.edu.vn.happycooking.adapters;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -8,6 +9,7 @@ import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeFragment;
 import calebzone.hcmute.edu.vn.happycooking.fragments.WeekFragment;
 
 public class PaperAdapter extends FragmentStatePagerAdapter {
+
     int mNumOfTab;
 
     public PaperAdapter(FragmentManager fm, int mNumOfTab) {

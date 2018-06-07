@@ -21,11 +21,11 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
-
-        <TextView
+        <ListView
+            android:id="@+id/list_food"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="aa"/>
+            android:layout_height="match_parent" />
+
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager

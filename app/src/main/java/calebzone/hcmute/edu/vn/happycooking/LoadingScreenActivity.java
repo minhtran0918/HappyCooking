@@ -17,12 +17,12 @@ public class LoadingScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_screen);
         referencedComponent();
-        int mTimeRun = 500, mTimeAll = 5000;
+        int mTimeRun = 500, mTimeAll = 3000;
         mCountDownTimer = new CountDownTimer(mTimeAll, mTimeRun) {
             @Override
             public void onTick(long millisUntilFinished) {
                 int getProgressCurrent = mProgressBarLine.getProgress();
-                mProgressBarLine.setProgress(getProgressCurrent + 10);
+                mProgressBarLine.setProgress(getProgressCurrent + 30);
             }
 
             @Override

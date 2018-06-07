@@ -6,56 +6,10 @@
     tools:context=".fragments.WeekFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="400dp"
-                        android:layout_height="175dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Title Image"
-                        android:textSize="24dp"
-                        android:gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="400dp"
-                        android:layout_height="175dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Title Image"
-                        android:textSize="24dp"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 </FrameLayout>
