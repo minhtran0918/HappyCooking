@@ -1,15 +1,21 @@
 package calebzone.hcmute.edu.vn.happycooking;
 
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 
 import java.util.ArrayList;
 
-import calebzone.hcmute.edu.vn.happycooking.adapters.FoodAdapter;
-import calebzone.hcmute.edu.vn.happycooking.adapters.PaperAdapter;
+import calebzone.hcmute.edu.vn.happycooking.adapters.FoodAdapterListView;
+import calebzone.hcmute.edu.vn.happycooking.adapters.FoodAdapterRecyclerView;
 import calebzone.hcmute.edu.vn.happycooking.model.Food;
 
 /*
@@ -20,21 +26,37 @@ public class HomeActivity extends AppCompatActivity {
 
     //region REFERENCED COMPONENT
     private TabLayout tabLayout_home = null;
-    private ViewPager viewPager_home = null;
-    ListView listViewFood;
+    RecyclerView recyclerListFood;
     ArrayList<Food> arrayListFood;
-    FoodAdapter foodAdapter;
 
     //method
-    public void referencedComponent() {
+    public void initView() {
         tabLayout_home = (TabLayout) findViewById(R.id.tabLayout_home);
-        viewPager_home = (ViewPager) findViewById(R.id.viewPaper_home);
-        listViewFood = (ListView) findViewById(R.id.list_food);
+        recyclerListFood = (RecyclerView) findViewById(R.id.recyclerList_food);
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        /*//Config divider RecyclerView
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(this,linearLayoutManager.getOrientation());
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.custom_divider_recycler_view));
+        recyclerListFood.addItemDecoration(dividerItemDecoration);*/
+
+        recyclerListFood.setHasFixedSize(true);
+        recyclerListFood.setLayoutManager(linearLayoutManager);
+        /*recyclerListFood.setItemAnimator(new DefaultItemAnimator());*/
+
+
         arrayListFood = new ArrayList<>();
-        arrayListFood.add(new Food("Phở gái 1","Food",R.drawable.a));
-        arrayListFood.add(new Food("Phở gái 2","Drink",R.drawable.b));
-        arrayListFood.add(new Food("Phở gái 2","Drink",R.drawable.b));
-        arrayListFood.add(new Food("Phở gái 2","Drink",R.drawable.b));
+        arrayListFood.add(new Food("Phở gái 1", "Food", R.drawable.a));
+        arrayListFood.add(new Food("Phở gái 2", "Drink", R.drawable.b));
+        arrayListFood.add(new Food("Phở gái 3", "Food", R.drawable.b));
+        arrayListFood.add(new Food("Phở gái 4", "Drink", R.drawable.a));
+        arrayListFood.add(new Food("Phở gái 5", "Drink", R.drawable.a));
+        arrayListFood.add(new Food("Phở gái 6", "Food", R.drawable.a));
+
+        FoodAdapterRecyclerView foodAdapterRecyclerView =
+                new FoodAdapterRecyclerView(getApplicationContext(), R.layout.list_food_for_week, arrayListFood);
+        recyclerListFood.setAdapter(foodAdapterRecyclerView);
     }
 
     //endregion
@@ -43,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        referencedComponent();
+        initView();
 
 /*        //setting tablayout
         tabLayout_home.addTab(tabLayout_home.newTab().setText("For Week"));
@@ -51,35 +73,15 @@ public class HomeActivity extends AppCompatActivity {
 
         final PaperAdapter adapter = new PaperAdapter(getSupportFragmentManager(),tabLayout_home.getTabCount());
         viewPager_home.setAdapter(adapter);
-        viewPager_home.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout_home));*/
-
-        foodAdapter = new FoodAdapter(this,R.layout.list_food_for_week,arrayListFood);
-        listViewFood.setAdapter(foodAdapter);
-
-        tabLayout_home.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager_home.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-    }
-
-
-
-    //region DESIGN
-    private void designTabLayout() {
+        viewPager_home.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout_home));
+        FoodAdapterListView foodAdapterListView = new FoodAdapterListView(this,R.layout.list_food_for_week,arrayListFood);
+        listViewFood.setAdapter(foodAdapterListView);*/
 
     }
-    //endregion
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.fragment_recipe_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 }
