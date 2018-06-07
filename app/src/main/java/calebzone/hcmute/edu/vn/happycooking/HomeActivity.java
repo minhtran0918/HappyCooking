@@ -1,9 +1,10 @@
 package calebzone.hcmute.edu.vn.happycooking;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,11 +12,14 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
 import calebzone.hcmute.edu.vn.happycooking.adapters.FoodAdapterListView;
 import calebzone.hcmute.edu.vn.happycooking.adapters.FoodAdapterRecyclerView;
+import calebzone.hcmute.edu.vn.happycooking.fragments.AboutDialogFragment;
+import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeFragment;
 import calebzone.hcmute.edu.vn.happycooking.model.Food;
 
 /*
@@ -25,13 +29,13 @@ import calebzone.hcmute.edu.vn.happycooking.model.Food;
 public class HomeActivity extends AppCompatActivity {
 
     //region REFERENCED COMPONENT
-    private TabLayout tabLayout_home = null;
+    //private TabLayout tabLayout_home = null;
     RecyclerView recyclerListFood;
     ArrayList<Food> arrayListFood;
 
     //method
     public void initView() {
-        tabLayout_home = (TabLayout) findViewById(R.id.tabLayout_home);
+        //tabLayout_home = (TabLayout) findViewById(R.id.tabLayout_home);
         recyclerListFood = (RecyclerView) findViewById(R.id.recyclerList_food);
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -65,7 +69,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        initView();
+        //initView();
+        loadFragment(new RecipeFragment());
 
 /*        //setting tablayout
         tabLayout_home.addTab(tabLayout_home.newTab().setText("For Week"));
@@ -79,9 +84,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.fragment_recipe_home, menu);
-        return super.onCreateOptionsMenu(menu);
+    private void loadFragment(Fragment fragment){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_recipe_list,fragment);
+        fragmentTransaction.commit();
     }
 }
