@@ -1,10 +1,10 @@
 package calebzone.hcmute.edu.vn.happycooking.fragments;
 
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,27 +15,30 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import calebzone.hcmute.edu.vn.happycooking.R;
-import calebzone.hcmute.edu.vn.happycooking.adapters.FoodAdapterRecyclerView;
+import calebzone.hcmute.edu.vn.happycooking.activity.RecipeDetailActivity;
+import calebzone.hcmute.edu.vn.happycooking.adapters.RecipeListAdapter;
 import calebzone.hcmute.edu.vn.happycooking.model.Food;
 
-public class RecipeFragment extends Fragment {
+public class RecipeListFragment extends Fragment {
+
     private Context currentContext;
 
     //region REFERENCED COMPONENT
-    //private TabLayout tabLayout_home = null;
+
     RecyclerView recyclerListFood;
+    RecipeListAdapter recipeListAdapter;
     ArrayList<Food> arrayListFood;
+
 
 
     //method
     public void initView(View view) {
-        //tabLayout_home = (TabLayout) findViewById(R.id.tabLayout_home);
         recyclerListFood = (RecyclerView) view.findViewById(R.id.recyclerList_food);
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -50,17 +53,16 @@ public class RecipeFragment extends Fragment {
         /*recyclerListFood.setItemAnimator(new DefaultItemAnimator());*/
 
         arrayListFood = new ArrayList<>();
-        arrayListFood.add(new Food("Phở gái 1", "Food", R.drawable.a));
-        arrayListFood.add(new Food("Phở gái 2", "Drink", R.drawable.b));
-        arrayListFood.add(new Food("Phở gái 3", "Food", R.drawable.b));
-        arrayListFood.add(new Food("Phở gái 4", "Drink", R.drawable.a));
-        arrayListFood.add(new Food("Phở gái 5", "Drink", R.drawable.a));
-        arrayListFood.add(new Food("Phở gái 6", "Food", R.drawable.a));
+        arrayListFood.add(new Food(101, "Phở gái 1", "Food", R.drawable.a));
+        arrayListFood.add(new Food(102, "Phở gái 2", "Drink", R.drawable.b));
+        arrayListFood.add(new Food(103, "Phở gái 3", "Food", R.drawable.b));
+        arrayListFood.add(new Food(104, "Phở gái 4", "Drink", R.drawable.a));
+        arrayListFood.add(new Food(105, "Phở gái 5", "Drink", R.drawable.a));
+        arrayListFood.add(new Food(106, "Phở gái 6", "Food", R.drawable.a));
 
-
-        FoodAdapterRecyclerView foodAdapterRecyclerView =
-        new FoodAdapterRecyclerView(view.getContext(), R.layout.list_food_for_week, arrayListFood);
-        recyclerListFood.setAdapter(foodAdapterRecyclerView);
+        //TODO: Database sẽ kết nối đưa dữ liệu tại đây
+        recipeListAdapter = new RecipeListAdapter(view.getContext(), R.layout.list_food_for_week, arrayListFood);
+        recyclerListFood.setAdapter(recipeListAdapter);
     }
 
     //endregion
@@ -69,14 +71,23 @@ public class RecipeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         currentContext = view.getContext();
         initView(view);
+        Button button = (Button) view.findViewById(R.id.btn_test);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(currentContext, RecipeDetailActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -106,5 +117,4 @@ public class RecipeFragment extends Fragment {
         newFragment.setTargetFragment(this, 0);
         newFragment.show(getFragmentManager(), "about");
     }
-
 }

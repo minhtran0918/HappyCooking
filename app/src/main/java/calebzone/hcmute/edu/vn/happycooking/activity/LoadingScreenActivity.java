@@ -1,12 +1,12 @@
-package calebzone.hcmute.edu.vn.happycooking;
+package calebzone.hcmute.edu.vn.happycooking.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
+import calebzone.hcmute.edu.vn.happycooking.R;
 
 public class LoadingScreenActivity extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class LoadingScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_screen);
         referencedComponent();
-        int mTimeRun = 500, mTimeAll = 3000;
+        int mTimeRun = 500, mTimeAll = 1500;
         mCountDownTimer = new CountDownTimer(mTimeAll, mTimeRun) {
             @Override
             public void onTick(long millisUntilFinished) {

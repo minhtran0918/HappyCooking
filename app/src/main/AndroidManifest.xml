@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoadingScreenActivity"
+            android:name=".activity.LoadingScreenActivity"
             android:noHistory="true">
 
             <!-- Fist Loading screen -->
@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity">
+        <activity android:name=".activity.HomeActivity">
 
             <!--
             <intent-filter>
@@ -29,6 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             -->
+        </activity>
+        <activity android:name=".activity.RecipeDetailActivity">
+
         </activity>
     </application>
 

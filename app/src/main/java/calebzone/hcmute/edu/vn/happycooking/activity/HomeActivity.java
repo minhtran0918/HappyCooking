@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         final PaperAdapter adapter = new PaperAdapter(getSupportFragmentManager(),tabLayout_home.getTabCount());
         viewPager_home.setAdapter(adapter);
         viewPager_home.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout_home));
-        FoodAdapterListView foodAdapterListView = new FoodAdapterListView(this,R.layout.list_food_for_week,arrayListFood);
+        RecipeListAdapterListViewExample foodAdapterListView = new RecipeListAdapterListViewExample(this,R.layout.list_food_for_week,arrayListFood);
         listViewFood.setAdapter(foodAdapterListView);*/
 
     }

@@ -13,13 +13,13 @@ import java.util.List;
 import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.model.Food;
 
-public class FoodAdapterListView extends BaseAdapter {
+public class RecipeListAdapterListViewExample extends BaseAdapter {
 
     private Context currentContext;
     private int currentLayout;
     private List<Food> foodList;
 
-    public FoodAdapterListView(Context currentContext, int currentLayout, List<Food> foodList) {
+    public RecipeListAdapterListViewExample(Context currentContext, int currentLayout, List<Food> foodList) {
         this.currentContext = currentContext;
         this.currentLayout = currentLayout;
         this.foodList = foodList;
