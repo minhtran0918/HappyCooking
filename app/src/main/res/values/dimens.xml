@@ -5,4 +5,8 @@
     <dimen name="text_content">16sp</dimen>
     <dimen name="elevation_tab_home">6dp</dimen>
     <dimen name="padding_tab_home">8dp</dimen>
+
+
+    <dimen name="fragment_recipe_list_recycler_size">192dp</dimen>
+    <dimen name="fragment_recipe_list_recycler_item_spacing">4dp</dimen>
 </resources>

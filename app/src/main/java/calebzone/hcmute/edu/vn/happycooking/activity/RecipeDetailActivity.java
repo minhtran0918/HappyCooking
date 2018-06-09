@@ -15,6 +15,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
     public static Intent newIntent(Context context, long recipeId) {
         Intent intent = new Intent(context, RecipeDetailActivity.class);
 
+        /*Bundle bundle = new Bundle();
+        bundle.putLong(EXTRA_RECIPE_ID, recipeId);
+        intent.putExtra(EXTRA_RECIPE_ID, bundle);*/
+
         // extras
         intent.putExtra(EXTRA_RECIPE_ID, recipeId);
 

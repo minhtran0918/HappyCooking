@@ -69,7 +69,7 @@ public class RecipeListAdapterListViewExample extends BaseAdapter {
         Food currentFood = foodList.get(position);
         viewHolder.txtTileFood.setText(currentFood.getTitle());
         viewHolder.txtTypeFood.setText(currentFood.getType());
-        viewHolder.imgFood.setImageResource(currentFood.getImage());
+        //viewHolder.imgFood.setImageResource(currentFood.getImage());
 
         return convertView;
     }

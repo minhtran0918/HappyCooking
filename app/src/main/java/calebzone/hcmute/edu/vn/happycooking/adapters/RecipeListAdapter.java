@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -49,7 +53,10 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         holder.txtTileFood.setText(foodList.get(position).getTitle());
         holder.txtTypeFood.setText(foodList.get(position).getType());
-        holder.imgFood.setImageResource(foodList.get(position).getImage());
+        Picasso.get()
+                .load(foodList.get(position).getImage())
+                .placeholder(R.drawable.placeholder_empty)
+                .into(holder.imgFood);
         holder.setOnItemClickListener(new RecipeViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -57,9 +64,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                 /*Toast.makeText(currentContext, foodList.get(position).getTitle() + " id: " + foodList.get(position).getId(), Toast.LENGTH_SHORT).show();
                 RecipeListFragment recipeListFragment = new RecipeListFragment();
                 recipeListFragment.startRecipeDetailActivity(view,id);*/
-                Intent intent = new Intent(currentContext, RecipeDetailActivity.class);
-                // extras
-                //intent.putExtra(RecipeDetailActivity.EXTRA_RECIPE_ID, id);
+                Intent intent = RecipeDetailActivity.newIntent(currentContext, id);
                 ((Activity) currentContext).startActivity(intent);
             }
         });
@@ -102,8 +107,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             }
         }
         //TODO: LongClickListener Here
-
-
     }
 
 }

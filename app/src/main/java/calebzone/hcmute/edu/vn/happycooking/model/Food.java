@@ -4,13 +4,13 @@ public class Food {
     private long id;
     private String title;
     private String type;
-    private int image;
+    private String urlImage;
 
-    public Food(long id, String title, String type, int image) {
+    public Food(long id, String title, String type, String urlImage) {
         this.id = id;
         this.title = title;
         this.type = type;
-        this.image = image;
+        this.urlImage = urlImage;
     }
 
     public long getId() {
@@ -37,11 +37,11 @@ public class Food {
         this.type = type;
     }
 
-    public int getImage() {
-        return image;
+    public String getImage() {
+        return urlImage;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }
