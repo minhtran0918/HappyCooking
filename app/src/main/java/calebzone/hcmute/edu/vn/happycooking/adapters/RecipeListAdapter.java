@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.activity.RecipeDetailActivity;
+import calebzone.hcmute.edu.vn.happycooking.database.model.RecipeModel;
 import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeListFragment;
 import calebzone.hcmute.edu.vn.happycooking.model.Food;
 
@@ -29,12 +30,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     private Context currentContext;
     private int currentLayout;
-    private ArrayList<Food> foodList;
+    private ArrayList<RecipeModel> recipeList;
 
-    public RecipeListAdapter(Context currentContext, int currentLayout, ArrayList<Food> foodList) {
+    public RecipeListAdapter(Context currentContext, int currentLayout, ArrayList<RecipeModel> recipeList) {
         this.currentContext = currentContext;
         this.currentLayout = currentLayout;
-        this.foodList = foodList;
+        this.recipeList = recipeList;
     }
 
     @NonNull
@@ -51,43 +52,44 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
 
-        holder.txtTileFood.setText(foodList.get(position).getTitle());
-        holder.txtTypeFood.setText(foodList.get(position).getType());
+        holder.txtTileRecipe.setText(recipeList.get(position).getName());
+        holder.txtTypeRecipe.setText("Noob");
         Picasso.get()
-                .load(foodList.get(position).getImage())
+                .load(recipeList.get(position).getImage())
                 .placeholder(R.drawable.placeholder_empty)
-                .into(holder.imgFood);
+                .into(holder.imgRecipe);
         holder.setOnItemClickListener(new RecipeViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                long id = foodList.get(position).getId();
+                long id = recipeList.get(position).getId();
                 /*Toast.makeText(currentContext, foodList.get(position).getTitle() + " id: " + foodList.get(position).getId(), Toast.LENGTH_SHORT).show();
                 RecipeListFragment recipeListFragment = new RecipeListFragment();
                 recipeListFragment.startRecipeDetailActivity(view,id);*/
                 Intent intent = RecipeDetailActivity.newIntent(currentContext, id);
                 ((Activity) currentContext).startActivity(intent);
+                //((Activity) currentContext).overridePendingTransition(R.anim.enter_exit_detail, R.anim.enter_exit_detail);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return foodList.size();
+        return recipeList.size();
     }
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView txtTileFood;
-        TextView txtTypeFood;
-        ImageView imgFood;
+        TextView txtTileRecipe;
+        TextView txtTypeRecipe;
+        ImageView imgRecipe;
 
         private OnItemClickListener onItemClickListener;
 
         public RecipeViewHolder(View itemView) {
             super(itemView);
-            txtTileFood = (TextView) itemView.findViewById(R.id.title_food);
-            txtTypeFood = (TextView) itemView.findViewById(R.id.typeFood);
-            imgFood = (ImageView) itemView.findViewById(R.id.image_food);
+            txtTileRecipe = (TextView) itemView.findViewById(R.id.title_recipe);
+            txtTypeRecipe = (TextView) itemView.findViewById(R.id.type_recipe);
+            imgRecipe = (ImageView) itemView.findViewById(R.id.image_recipe);
             itemView.setOnClickListener(this);
         }
 

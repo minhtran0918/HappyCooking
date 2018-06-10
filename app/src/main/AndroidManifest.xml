@@ -15,7 +15,7 @@
             android:name=".activity.LoadingScreenActivity"
             android:noHistory="true">
 
-            <!-- Fist Loading screen -->
+            Fist Loading screen
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +26,18 @@
         <activity
             android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity android:name=".activity.MainActivity">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+
+
     </application>
 
 </manifest>

@@ -9,7 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerList_food"
+        android:id="@+id/recyclerList_recipe"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

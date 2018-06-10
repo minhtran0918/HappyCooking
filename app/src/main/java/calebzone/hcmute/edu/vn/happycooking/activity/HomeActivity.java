@@ -19,6 +19,10 @@ import android.view.MenuItem;
 import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeListFragment;
 
+/*
+    Happy Cooking App
+    Create 31/05/2018
+ */
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

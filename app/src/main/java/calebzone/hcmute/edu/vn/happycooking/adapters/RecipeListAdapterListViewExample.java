@@ -55,9 +55,9 @@ public class RecipeListAdapterListViewExample extends BaseAdapter {
 
             viewHolder = new ViewHolder();
             //region Referenced Component
-            viewHolder.txtTileFood = (TextView) convertView.findViewById(R.id.title_food);
-            viewHolder.txtTypeFood = (TextView) convertView.findViewById(R.id.typeFood);
-            viewHolder.imgFood = (ImageView) convertView.findViewById(R.id.image_food);
+            viewHolder.txtTileFood = (TextView) convertView.findViewById(R.id.title_recipe);
+            viewHolder.txtTypeFood = (TextView) convertView.findViewById(R.id.type_recipe);
+            viewHolder.imgFood = (ImageView) convertView.findViewById(R.id.image_recipe);
             //endregion
             convertView.setTag(viewHolder);
         }

@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/image_food"
+            android:id="@+id/image_recipe"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:contentDescription="@null"
@@ -26,7 +26,7 @@
 
 
     <TextView
-        android:id="@+id/typeFood"
+        android:id="@+id/type_recipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -41,17 +41,17 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/title_food"
+        android:id="@+id/title_recipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="5dp"
-        android:text="title-food"
+        android:text="title-recipe"
         android:textAllCaps="false"
         android:textSize="@dimen/text_title"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toEndOf="@+id/typeFood"
-        app:layout_constraintTop_toTopOf="@+id/typeFood" />
+        app:layout_constraintStart_toEndOf="@+id/type_recipe"
+        app:layout_constraintTop_toTopOf="@+id/type_recipe" />
 </android.support.constraint.ConstraintLayout>
