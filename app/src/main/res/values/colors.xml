@@ -7,4 +7,11 @@
     <color name="colorOrangeHeavy">#ff3c00</color>
     <color name="colorOrangeProcessBar">#f14e1d</color>
     <color name="color_control_highlight">#40000000</color>
+
+
+    <color name="global_color_carrot_primary">#ff5722</color>
+    <color name="global_color_carrot_primary_light">#ffccbc</color>
+    <color name="global_color_carrot_primary_dark">#e64a19</color>
+    <color name="global_color_carrot_accent">#4caf50</color>
+    <color name="global_color_carrot_control_activated">#4caf50</color>
 </resources>
