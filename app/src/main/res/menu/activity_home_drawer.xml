@@ -5,33 +5,53 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_all_recipe"
+            android:icon="@null"
+            android:title="@string/nav_title_all_recipe" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+            android:id="@+id/nav_favorite"
+            android:icon="@null"
+            android:title="@string/nav_title_favorite" />
 
-    <item android:title="Communicate">
+    </group>
+    <item android:title="@string/nav_group_category">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_cake"
+                android:icon="@null"
+                android:title="@string/nav_title_cake" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_soup"
+                android:icon="@null"
+                android:title="@string/nav_title_soup" />
+            <item
+                android:id="@+id/nav_porriedge"
+                android:icon="@null"
+                android:title="@string/nav_title_porridge" />
+            <item
+                android:id="@+id/nav_fried_food"
+                android:icon="@null"
+                android:title="@string/nav_title_fried_food" />
+            <item
+                android:id="@+id/nav_steaming"
+                android:icon="@null"
+                android:title="@string/nav_title_steaming" />
+            <item
+                android:id="@+id/nav_appetized"
+                android:icon="@null"
+                android:title="@string/nav_title_appetized" />
+            <item
+                android:id="@+id/nav_cook_with_sauce"
+                android:icon="@null"
+                android:title="@string/nav_title_cook_with_sauce" />
+            <item
+                android:id="@+id/nav_stir_fry"
+                android:icon="@null"
+                android:title="@string/nav_title_stir_fry" />
+            <item
+                android:id="@+id/nav_smoothies"
+                android:icon="@null"
+                android:title="@string/nav_title_smoothies" />
         </menu>
     </item>
 

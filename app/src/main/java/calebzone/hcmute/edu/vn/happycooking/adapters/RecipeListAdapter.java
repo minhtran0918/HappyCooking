@@ -53,7 +53,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
 
         holder.txtTileRecipe.setText(recipeList.get(position).getName());
-        holder.txtTypeRecipe.setText("Noob");
         Picasso.get()
                 .load(recipeList.get(position).getImage())
                 .placeholder(R.drawable.placeholder_empty)
@@ -61,11 +60,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         holder.setOnItemClickListener(new RecipeViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                long id = recipeList.get(position).getId();
+                long id = Long.getLong(recipeList.get(position).getId());
                 /*Toast.makeText(currentContext, foodList.get(position).getTitle() + " id: " + foodList.get(position).getId(), Toast.LENGTH_SHORT).show();
                 RecipeListFragment recipeListFragment = new RecipeListFragment();
                 recipeListFragment.startRecipeDetailActivity(view,id);*/
-                Intent intent = RecipeDetailActivity.newIntent(currentContext, id);
+                Intent intent = RecipeDetailActivity.newIntent(currentContext, recipeList.get(position));
                 ((Activity) currentContext).startActivity(intent);
                 //((Activity) currentContext).overridePendingTransition(R.anim.enter_exit_detail, R.anim.enter_exit_detail);
             }
@@ -80,7 +79,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public static class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView txtTileRecipe;
-        TextView txtTypeRecipe;
         ImageView imgRecipe;
 
         private OnItemClickListener onItemClickListener;
@@ -88,7 +86,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public RecipeViewHolder(View itemView) {
             super(itemView);
             txtTileRecipe = (TextView) itemView.findViewById(R.id.title_recipe);
-            txtTypeRecipe = (TextView) itemView.findViewById(R.id.type_recipe);
             imgRecipe = (ImageView) itemView.findViewById(R.id.image_recipe);
             itemView.setOnClickListener(this);
         }

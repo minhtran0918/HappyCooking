@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import calebzone.hcmute.edu.vn.happycooking.MyUtility.CheckUtil;
 import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeListFragment;
 
@@ -25,6 +26,9 @@ import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeListFragment;
  */
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String EXTRA_CAT_ID = "cat_id";
+    private RecipeListFragment mFragmentRoot;
+    private String cat_id_key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +54,8 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        loadFragment(new RecipeListFragment());
-
+        setBundleData("2");
+        loadFragment();
     }
 
     @Override
@@ -92,28 +96,92 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        switch (id) {
+            case R.id.nav_all_recipe:
+                setBundleData("0");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_all_recipe");
+                break;
 
-        } else if (id == R.id.nav_slideshow) {
+            case R.id.nav_favorite:
+                CheckUtil.createToast(this, "nav_favorite");
+                break;
 
-        } else if (id == R.id.nav_manage) {
+            case R.id.nav_cake:
+                setBundleData("1");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_cake");
+                break;
 
-        } else if (id == R.id.nav_share) {
+            case R.id.nav_soup:
+                setBundleData("2");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_soup");
+                break;
 
-        } else if (id == R.id.nav_send) {
+            case R.id.nav_porriedge:
+                setBundleData("3");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_porriedge");
+                break;
 
+            case R.id.nav_fried_food:
+                setBundleData("4");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_fried_food");
+                break;
+
+            case R.id.nav_steaming:
+                setBundleData("5");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_steaming");
+                break;
+
+            case R.id.nav_appetized:
+                setBundleData("6");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_appetized");
+                break;
+
+            case R.id.nav_cook_with_sauce:
+                setBundleData("7");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_cook_with_sauce");
+                break;
+
+            case R.id.nav_stir_fry:
+                setBundleData("8");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_stir_fry");
+                break;
+
+            case R.id.nav_smoothies:
+                setBundleData("9");
+                loadFragment();
+                CheckUtil.createToast(this, "nav_smoothies");
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void loadFragment(Fragment fragment){
+
+    private void setBundleData(String cat_id) {
+        mFragmentRoot = new RecipeListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_CAT_ID, cat_id);
+        mFragmentRoot.setArguments(bundle);
+    }
+
+    private void loadFragment() {
         FragmentManager fragmentManager = getFragmentManager();
+        int count = fragmentManager.getBackStackEntryCount();
+        for (int i = 0; i < count; i++) {
+            fragmentManager.popBackStack();
+        }
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_recipe_list,fragment);
+        fragmentTransaction.replace(R.id.fragment_recipe_list, mFragmentRoot);
         fragmentTransaction.commit();
     }
 }

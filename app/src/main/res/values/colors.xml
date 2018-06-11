@@ -14,4 +14,6 @@
     <color name="global_color_carrot_primary_dark">#e64a19</color>
     <color name="global_color_carrot_accent">#4caf50</color>
     <color name="global_color_carrot_control_activated">#4caf50</color>
+
+    <color name="visible_text">#3f000000</color>
 </resources>
