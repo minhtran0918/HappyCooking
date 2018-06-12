@@ -11,14 +11,19 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import calebzone.hcmute.edu.vn.happycooking.MyUtility.Logcat;
+import calebzone.hcmute.edu.vn.happycooking.MyUtility.My;
 import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.database.model.RecipeModel;
 import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeDetailFragment;
@@ -29,6 +34,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
     public static final String EXTRA_RECIPE_BUNDLE = "bla_bla";
     private RecipeModel mRecipeRoot;
     private RecipeDetailFragment mFragmentRoot;
+
+    private YouTubePlayerSupportFragment youTubePlayerFragment;
+    private YouTubePlayer youTubePlayer;
+    private String mRootYoutubeID;
 
     public static Intent newIntent(Context context, RecipeModel recipeArrayListe) {
         Intent intent = new Intent(context, RecipeDetailActivity.class);
@@ -48,6 +57,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         getData();
         bindData();
         loadFragment();
+        initializeYoutubePlayer();
     }
 
     private void bindData() {
@@ -65,6 +75,39 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private void loadBackdrop() {
         final ImageView imageView = findViewById(R.id.image_recipe);
         Picasso.get().load(mRecipeRoot.getImage()).placeholder(R.drawable.placeholder_empty).into(imageView);
+    }
+
+    private void initializeYoutubePlayer() {
+        mRootYoutubeID = mRecipeRoot.getLink().toString();
+        youTubePlayerFragment = (YouTubePlayerSupportFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.youtube_player_fragment);
+
+        if (youTubePlayerFragment == null)
+            return;
+
+        youTubePlayerFragment.initialize(My.API_YOUTUBE, new YouTubePlayer.OnInitializedListener() {
+
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+                                                boolean wasRestored) {
+                if (!wasRestored) {
+                    youTubePlayer = player;
+
+                    //set the player style default
+                    youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
+
+                    //cue the 1st video by default
+                    youTubePlayer.cueVideo(mRootYoutubeID);
+                }
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
+
+                //print or show error if initialization failed
+                Log.e("aaaaaabbb", "Youtube Player View initialization failed");
+            }
+        });
     }
 
     private void getData() {
@@ -90,11 +133,5 @@ public class RecipeDetailActivity extends AppCompatActivity {
         //TODO: load fagment
         fragmentTransaction.add(R.id.fragment_recipe_detail, mFragmentRoot);
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.fragment_recipe_detail, menu);
-        return true;
     }
 }

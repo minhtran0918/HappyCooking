@@ -1,32 +1,9 @@
 package calebzone.hcmute.edu.vn.happycooking.database;
 
 import android.content.Context;
-import android.util.ArrayMap;
-import android.util.Log;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.CheckUtil;
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.Logcat;
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.MyVariable;
 import calebzone.hcmute.edu.vn.happycooking.database.model.RecipeModel;
 
 public class GetDataFromWeb {

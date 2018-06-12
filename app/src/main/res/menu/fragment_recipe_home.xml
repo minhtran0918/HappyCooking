@@ -4,21 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_login"
+        android:id="@+id/fragment_recipe_list_menu_login"
         android:title="@string/menu_login"
         android:icon="@null"
         android:orderInCategory="1"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_rate"
+        android:id="@+id/fragment_recipe_list_menu_rate"
         android:title="@string/menu_rate"
         android:icon="@null"
         android:orderInCategory="2"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_about"
+        android:id="@+id/fragment_recipe_list_menu_about"
         android:title="@string/menu_about"
         android:icon="@null"
         android:orderInCategory="3"

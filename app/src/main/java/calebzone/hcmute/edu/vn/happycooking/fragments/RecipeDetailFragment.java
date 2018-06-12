@@ -1,28 +1,45 @@
 package calebzone.hcmute.edu.vn.happycooking.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.share.model.ShareContent;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.model.ShareVideo;
+import com.facebook.share.model.ShareVideoContent;
+import com.facebook.share.widget.ShareButton;
+import com.facebook.share.widget.ShareDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
 import calebzone.hcmute.edu.vn.happycooking.MyUtility.CheckUtil;
 import calebzone.hcmute.edu.vn.happycooking.MyUtility.Logcat;
+import calebzone.hcmute.edu.vn.happycooking.MyUtility.My;
 import calebzone.hcmute.edu.vn.happycooking.MyUtility.WrapTextViewFilter;
 import calebzone.hcmute.edu.vn.happycooking.R;
+import calebzone.hcmute.edu.vn.happycooking.activity.HomeActivity;
 import calebzone.hcmute.edu.vn.happycooking.activity.RecipeDetailActivity;
 import calebzone.hcmute.edu.vn.happycooking.database.model.RecipeModel;
 
@@ -35,7 +52,7 @@ public class RecipeDetailFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
         // handle intent extras
     }
 
@@ -51,7 +68,6 @@ public class RecipeDetailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         loadDataFromBundle();
         bindData();
-
     }
 
     private void loadDataFromBundle() {
@@ -59,28 +75,50 @@ public class RecipeDetailFragment extends Fragment {
         mRecipeRoot = (RecipeModel) bundleData.getSerializable(RecipeDetailActivity.EXTRA_RECIPE_BUNDLE);
     }
 
-    //TODO: fix nội dung
     private void bindData() {
         TextView txtIntroRecipe = (TextView) mRootView.findViewById(R.id.fragment_recipe_list_intro_content);
         TextView txtIngredentsRecipe = (TextView) mRootView.findViewById(R.id.fragment_recipe_list_ingredients_content);
         TextView txtInstructionRecipe = (TextView) mRootView.findViewById(R.id.fragment_recipe_list_instruction_content);
         txtIntroRecipe.setText(mRecipeRoot.getIntro());
         txtIngredentsRecipe.setText(mRecipeRoot.getIngredient().toString());
-
-/*        String noidung = "1.abcdefgh\n" + "2.abcdefgh 3.abcdefgh 4.abcdefgh";
-        SpannableString noidungspanned = new SpannableString(noidung);
-        String bla = mRecipeRoot.getInstruction().toString();*/
         txtInstructionRecipe.setText(mRecipeRoot.getInstruction());
     }
 
-    private String wrapText(String input) {
-        String output = "";
-        int indexFind = 0;
-        indexFind = input.indexOf(String.valueOf(2) + ".");
-
-        input.substring(indexFind);
-        Logcat.d(input);
-
-        return output;
+    private void shareFB() {
+        Uri videoFileUri = Uri.parse(My.URL_YOUTUBE + mRecipeRoot.getLink().toString());
+        ShareDialog shareDialog = new ShareDialog((Activity) mRootContext);
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(videoFileUri)
+                .setQuote(mRecipeRoot.getName())
+                .build();
+        shareDialog.show(content);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_recipe_detail, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.fragment_recipe_detail_menu_share) {
+            shareFB();
+        } else if (id == R.id.fragment_recipe_detail_menu_rate) {
+            Toast.makeText(mRootContext, "Rate", Toast.LENGTH_LONG).show();
+        } else {
+            showAboutDialog();
+        }
+        return true;
+    }
+
+    private void showAboutDialog() {
+        // create and show the dialog
+        DialogFragment newFragment = AboutDialogFragment.newInstance();
+        newFragment.setTargetFragment(this, 0);
+        newFragment.show(getFragmentManager(), "about");
+    }
+
 }

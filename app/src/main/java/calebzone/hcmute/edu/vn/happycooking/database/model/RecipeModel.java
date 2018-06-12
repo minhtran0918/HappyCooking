@@ -116,6 +116,9 @@ public class RecipeModel implements Serializable {
     }
 
     public Object getLink() {
+        if (link == null) {
+            link = "";
+        }
         return link;
     }
 

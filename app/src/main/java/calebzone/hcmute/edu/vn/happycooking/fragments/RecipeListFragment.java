@@ -19,7 +19,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ import java.util.List;
 
 import calebzone.hcmute.edu.vn.happycooking.MyUtility.CheckUtil;
 import calebzone.hcmute.edu.vn.happycooking.MyUtility.Logcat;
+import calebzone.hcmute.edu.vn.happycooking.MyUtility.My;
 import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.activity.HomeActivity;
 import calebzone.hcmute.edu.vn.happycooking.activity.RecipeDetailActivity;
@@ -69,6 +74,7 @@ public class RecipeListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setupRecyclerView();
+        bindData();
         loadDataFromBundle();
         arrayListRecipe = new ArrayList<RecipeModel>();
         loadRetrofit();
@@ -76,20 +82,14 @@ public class RecipeListFragment extends Fragment {
 
     private void bindData() {
 
-        //TODO: Database sẽ kết nối đưa dữ liệu tại đây
-        /*if(mRootCatId == "1") {
-        }
-        else{
-            arrayListRecipe.add(new RecipeModel(101, 1,"Phở gái 1", "Food", "bla","bla","http://hot24h.org/wp-content/uploads/2017/12/hinh-gai-de-thuong.jpg","",0));
-        }*/
 
         //arrayListRecipe.add(new RecipeModel("101", "1","Phở gái 1", "Food", "bla", "bla", "http://hot24h.org/wp-content/uploads/2017/12/hinh-gai-de-thuong.jpg","",""));
         //arrayListRecipe.add(new RecipeModel("102","2", "Phở gái 2, Phở gái 2 Phở gái 2", "Drink", "bla", "blo", "http://i.imgur.com/DvpvklR.png","",""));
         /*GetDataFromWeb getDataFromWeb = new GetDataFromWeb(mRootContext);
         arrayListRecipe = getDataFromWeb.getRecipeModelArrayList();*/
-        recipeListAdapter = new RecipeListAdapter(mRootView.getContext(), R.layout.list_food_for_week, arrayListRecipe);
+        /*recipeListAdapter = new RecipeListAdapter(mRootView.getContext(), R.layout.list_food_for_week, arrayListRecipe);
         mRecyclerListRecipe.setAdapter(recipeListAdapter);
-        recipeListAdapter.notifyDataSetChanged();
+        recipeListAdapter.notifyDataSetChanged();*/
     }
 
    /* private ArrayList<RecipeModel> loadData(ArrayList<RecipeModel> arrayListRecipe) {
@@ -98,13 +98,6 @@ public class RecipeListFragment extends Fragment {
         getDataFromWeb.readDataByCat(mRootCatId, arrayListRecipe);
         return getDataFromWeb.returnDataFromWeb();
     }*/
-
-    private void showAboutDialog() {
-        // create and show the dialog
-        DialogFragment newFragment = AboutDialogFragment.newInstance();
-        newFragment.setTargetFragment(this, 0);
-        newFragment.show(getFragmentManager(), "about");
-    }
 
     private void loadDataFromBundle() {
         Bundle bundle = getArguments();
@@ -151,26 +144,10 @@ public class RecipeListFragment extends Fragment {
     }
 
     //endregion
-    /*@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
-        menuInflater.inflate(R.menu.fragment_recipe_home, menu);
-        super.onCreateOptionsMenu(menu, menuInflater);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_login:
-                break;
-            case R.id.menu_rate:
-                break;
-            case R.id.menu_about:
-                showAboutDialog();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
+
     private void loadRetrofit() {
+        //TODO: Database sẽ kết nối đưa dữ liệu tại đây
         DataClient dataClient = APIUtils.getData();
         Call<List<RecipeModel>> callback = dataClient.getData(mRootCatId);
         callback.enqueue(new Callback<List<RecipeModel>>() {
@@ -178,20 +155,21 @@ public class RecipeListFragment extends Fragment {
             public void onResponse(Call<List<RecipeModel>> call, Response<List<RecipeModel>> response) {
                 ArrayList<RecipeModel> recipeArrayList = (ArrayList<RecipeModel>) response.body();
                 if (recipeArrayList.size() > 0) {
-                    String id, name, intro, ingredient, instruction, image;
+                    String id, name, intro, ingredient, instruction, image, link;
                     for (int i = 0; i < recipeArrayList.size(); i++) {
                         id = recipeArrayList.get(i).getId();
                         name = recipeArrayList.get(i).getName();
                         intro = recipeArrayList.get(i).getIntro();
-
                         ingredient = recipeArrayList.get(i).getIngredient().toString();
-
                         instruction = recipeArrayList.get(i).getInstruction();
                         image = recipeArrayList.get(i).getImage();
-                        arrayListRecipe.add(new RecipeModel(id, "1", name, intro, ingredient, instruction, image, "", ""));
+                        link = recipeArrayList.get(i).getLink().toString();
+                        arrayListRecipe.add(new RecipeModel(id, "1", name, intro, ingredient, instruction, image, link, ""));
                     }
                 }
-                bindData();
+                recipeListAdapter = new RecipeListAdapter(mRootView.getContext(), R.layout.list_food_for_week, arrayListRecipe);
+                mRecyclerListRecipe.setAdapter(recipeListAdapter);
+                recipeListAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -200,4 +178,5 @@ public class RecipeListFragment extends Fragment {
             }
         });
     }
+
 }
