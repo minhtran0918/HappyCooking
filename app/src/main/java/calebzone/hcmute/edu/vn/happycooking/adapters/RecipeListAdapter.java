@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.activity.RecipeDetailActivity;
@@ -31,11 +32,14 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     private Context currentContext;
     private int currentLayout;
     private ArrayList<RecipeModel> recipeList;
+    private ArrayList<RecipeModel> recipeListBase;
 
     public RecipeListAdapter(Context currentContext, int currentLayout, ArrayList<RecipeModel> recipeList) {
         this.currentContext = currentContext;
         this.currentLayout = currentLayout;
         this.recipeList = recipeList;
+        this.recipeListBase = new ArrayList<RecipeModel>();
+        this.recipeListBase.addAll(recipeList);
     }
 
     @NonNull
@@ -107,5 +111,18 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         }
         //TODO: LongClickListener Here
     }
-
+    public void filter(String charText){
+        charText = charText.toLowerCase(Locale.getDefault());
+        recipeList.clear();
+        if(charText.length() == 0){
+            recipeList.addAll(recipeListBase);
+        }else{
+            for(RecipeModel var : recipeListBase){
+                if(var.getName().toLowerCase(Locale.getDefault()).contains(charText)){
+                    recipeList.add(var);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 }

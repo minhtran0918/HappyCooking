@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
@@ -39,8 +40,9 @@ import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeListFragment;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static final String EXTRA_CAT_ID = "cat_id";
-    private RecipeListFragment mFragmentRoot;
+    public RecipeListFragment mFragmentRoot;
     private int mRootCurrentId;
+    public SearchView mRootSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +59,7 @@ public class HomeActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
+*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -92,60 +94,60 @@ public class HomeActivity extends AppCompatActivity
             switch (id) {
                 case R.id.nav_all_recipe:
                     setBundleData("0");
-                    CheckUtil.createToast(this, "nav_all_recipe");
+                    //CheckUtil.createToast(this, "nav_all_recipe");
                     break;
 
                 case R.id.nav_favorite:
                     setBundleData("0");
-                    CheckUtil.createToast(this, "nav_favorite");
+                    //CheckUtil.createToast(this, "nav_favorite");
                     break;
                 case R.id.nav_suggest:
                     setBundleData("10");
-                    CheckUtil.createToast(this, "nav_favorite");
+                    //CheckUtil.createToast(this, "nav_favorite");
                     break;
                 case R.id.nav_cake:
                     setBundleData("1");
-                    CheckUtil.createToast(this, "nav_cake");
+                    //CheckUtil.createToast(this, "nav_cake");
                     break;
 
                 case R.id.nav_soup:
                     setBundleData("2");
-                    CheckUtil.createToast(this, "nav_soup");
+                    //CheckUtil.createToast(this, "nav_soup");
                     break;
 
                 case R.id.nav_porriedge:
                     setBundleData("3");
-                    CheckUtil.createToast(this, "nav_porriedge");
+                    //CheckUtil.createToast(this, "nav_porriedge");
                     break;
 
                 case R.id.nav_fried_food:
                     setBundleData("4");
-                    CheckUtil.createToast(this, "nav_fried_food");
+                    //CheckUtil.createToast(this, "nav_fried_food");
                     break;
 
                 case R.id.nav_steaming:
                     setBundleData("5");
-                    CheckUtil.createToast(this, "nav_steaming");
+                    //CheckUtil.createToast(this, "nav_steaming");
                     break;
 
                 case R.id.nav_appetized:
                     setBundleData("6");
-                    CheckUtil.createToast(this, "nav_appetized");
+                    //CheckUtil.createToast(this, "nav_appetized");
                     break;
 
                 case R.id.nav_cook_with_sauce:
                     setBundleData("7");
-                    CheckUtil.createToast(this, "nav_cook_with_sauce");
+                    //CheckUtil.createToast(this, "nav_cook_with_sauce");
                     break;
 
                 case R.id.nav_stir_fry:
                     setBundleData("8");
-                    CheckUtil.createToast(this, "nav_stir_fry");
+                    //CheckUtil.createToast(this, "nav_stir_fry");
                     break;
 
                 case R.id.nav_smoothies:
                     setBundleData("9");
-                    CheckUtil.createToast(this, "nav_smoothies");
+                    //CheckUtil.createToast(this, "nav_smoothies");
                     break;
             }
             mRootCurrentId = id;
@@ -159,6 +161,20 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.fab_search, menu);
+        mRootSearch = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        mRootSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mFragmentRoot.getRecipeListAdapter().filter(newText.trim());
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 

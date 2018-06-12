@@ -104,14 +104,20 @@ public class RecipeDetailFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.fragment_recipe_detail_menu_share) {
-            shareFB();
-        } else if (id == R.id.fragment_recipe_detail_menu_rate) {
-            Toast.makeText(mRootContext, "Rate", Toast.LENGTH_LONG).show();
-        } else {
-            showAboutDialog();
+        switch (id) {
+            case R.id.fragment_recipe_detail_menu_share:
+                shareFB();
+                break;
+            case R.id.fragment_recipe_detail_menu_rate:
+                Toast.makeText(mRootContext, "Rate", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.fragment_recipe_detail_menu_about:
+                showAboutDialog();
+                break;
+            case android.R.id.home:
+                ((Activity) mRootContext).finish();
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private void showAboutDialog() {

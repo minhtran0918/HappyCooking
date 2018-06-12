@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Happy Cooking</string>
 
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">Happy Cooking Bla Blo</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Happy Cooking</string>
@@ -38,7 +38,6 @@
     <string name="fragment_recipe_detail_intro_title">Intro</string>
     <string name="fragment_recipe_detail_ingredients_title">Ingredients</string>
     <string name="fragment_recipe_detail_instruction_title">Instruction</string>
-    <string name="title_activity_youtube">YoutubeActivity</string>
 
     <string name="facebook_app_id">237123983719406</string>
 </resources>

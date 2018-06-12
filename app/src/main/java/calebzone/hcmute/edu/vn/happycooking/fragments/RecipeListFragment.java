@@ -53,7 +53,11 @@ public class RecipeListFragment extends Fragment {
     private ArrayList<RecipeModel> arrayListRecipe;
     private String mRootCatId;
     private YouTubePlayerView mRootYoutube;
-    RecipeListAdapter recipeListAdapter;
+    public RecipeListAdapter recipeListAdapter;
+
+    public RecipeListAdapter getRecipeListAdapter() {
+        return recipeListAdapter;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -146,7 +150,7 @@ public class RecipeListFragment extends Fragment {
     //endregion
 
 
-    private void loadRetrofit() {
+    public void loadRetrofit() {
         //TODO: Database sẽ kết nối đưa dữ liệu tại đây
         DataClient dataClient = APIUtils.getData();
         Call<List<RecipeModel>> callback = dataClient.getData(mRootCatId);
