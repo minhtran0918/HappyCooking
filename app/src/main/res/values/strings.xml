@@ -13,7 +13,7 @@
 
     <string name="nav_title_all_recipe">All Recipe</string>
     <string name="nav_title_favorite">Favorite</string>
-
+    <string name="nav_title_suggest">Menu suggestions</string>
     <string name="nav_group_category">Category</string>
     <string name="nav_title_cake">Món bánh</string>
     <string name="nav_title_soup">Món canh</string>

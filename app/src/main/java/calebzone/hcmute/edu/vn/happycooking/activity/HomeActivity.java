@@ -99,7 +99,10 @@ public class HomeActivity extends AppCompatActivity
                     setBundleData("0");
                     CheckUtil.createToast(this, "nav_favorite");
                     break;
-
+                case R.id.nav_suggest:
+                    setBundleData("10");
+                    CheckUtil.createToast(this, "nav_favorite");
+                    break;
                 case R.id.nav_cake:
                     setBundleData("1");
                     CheckUtil.createToast(this, "nav_cake");

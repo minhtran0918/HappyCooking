@@ -2,57 +2,62 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/navigation_drawer_group_one"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_all_recipe"
-            android:icon="@null"
+            android:checked="true"
+            android:icon="@drawable/ic_menu_nav_all_recipe"
             android:title="@string/nav_title_all_recipe" />
         <item
             android:id="@+id/nav_favorite"
-            android:icon="@null"
+            android:icon="@drawable/ic_menu_nav_favorite"
             android:title="@string/nav_title_favorite" />
-
+        <item
+            android:id="@+id/nav_suggest"
+            android:icon="@drawable/ic_menu_nav_suggest"
+            android:title="@string/nav_title_suggest" />
     </group>
-    <item android:title="@string/nav_group_category">
-        <menu>
-            <item
-                android:id="@+id/nav_cake"
-                android:icon="@null"
-                android:title="@string/nav_title_cake" />
-            <item
-                android:id="@+id/nav_soup"
-                android:icon="@null"
-                android:title="@string/nav_title_soup" />
-            <item
-                android:id="@+id/nav_porriedge"
-                android:icon="@null"
-                android:title="@string/nav_title_porridge" />
-            <item
-                android:id="@+id/nav_fried_food"
-                android:icon="@null"
-                android:title="@string/nav_title_fried_food" />
-            <item
-                android:id="@+id/nav_steaming"
-                android:icon="@null"
-                android:title="@string/nav_title_steaming" />
-            <item
-                android:id="@+id/nav_appetized"
-                android:icon="@null"
-                android:title="@string/nav_title_appetized" />
-            <item
-                android:id="@+id/nav_cook_with_sauce"
-                android:icon="@null"
-                android:title="@string/nav_title_cook_with_sauce" />
-            <item
-                android:id="@+id/nav_stir_fry"
-                android:icon="@null"
-                android:title="@string/nav_title_stir_fry" />
-            <item
-                android:id="@+id/nav_smoothies"
-                android:icon="@null"
-                android:title="@string/nav_title_smoothies" />
-        </menu>
-    </item>
 
+    <group
+        android:id="@+id/navigation_drawer_group_two"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cake"
+            android:icon="@drawable/ic_menu_nav_cake"
+            android:title="@string/nav_title_cake" />
+        <item
+            android:id="@+id/nav_soup"
+            android:icon="@drawable/ic_menu_nav_soup"
+            android:title="@string/nav_title_soup" />
+        <item
+            android:id="@+id/nav_porriedge"
+            android:icon="@drawable/ic_menu_nav_porridge"
+            android:title="@string/nav_title_porridge" />
+        <item
+            android:id="@+id/nav_fried_food"
+            android:icon="@drawable/ic_menu_nav_fried_food"
+            android:title="@string/nav_title_fried_food" />
+        <item
+            android:id="@+id/nav_steaming"
+            android:icon="@drawable/ic_menu_nav_steaming"
+            android:title="@string/nav_title_steaming" />
+        <item
+            android:id="@+id/nav_appetized"
+            android:icon="@drawable/ic_menu_nav_apptized"
+            android:title="@string/nav_title_appetized" />
+        <item
+            android:id="@+id/nav_cook_with_sauce"
+            android:icon="@drawable/ic_menu_nav_cook_with_sauce"
+            android:title="@string/nav_title_cook_with_sauce" />
+        <item
+            android:id="@+id/nav_stir_fry"
+            android:icon="@drawable/ic_menu_nav_stir_fry"
+            android:title="@string/nav_title_stir_fry" />
+        <item
+            android:id="@+id/nav_smoothies"
+            android:icon="@drawable/ic_menu_nav_smothies"
+            android:title="@string/nav_title_smoothies" />
+    </group>
 </menu>
