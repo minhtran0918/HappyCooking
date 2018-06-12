@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,8 @@ public class RecipeListFragment extends Fragment {
     private RecyclerView mRecyclerListRecipe = null;
     private ArrayList<RecipeModel> arrayListRecipe;
     private String mRootCatId;
+    private YouTubePlayerView mRootYoutube;
+    RecipeListAdapter recipeListAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,30 +68,26 @@ public class RecipeListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadDataFromBundle();
         setupRecyclerView();
         loadDataFromBundle();
-        bindData();
+        arrayListRecipe = new ArrayList<RecipeModel>();
+        loadRetrofit();
     }
 
-
     private void bindData() {
-        RecipeListAdapter recipeListAdapter;
-        //TODO: Database sẽ kết nối đưa dữ liệu tại đây
-        arrayListRecipe = new ArrayList<RecipeModel>();
-        recipeListAdapter = new RecipeListAdapter(mRootView.getContext(), R.layout.list_food_for_week, arrayListRecipe);
-        /*if(mRootCatId == "1") {
 
+        //TODO: Database sẽ kết nối đưa dữ liệu tại đây
+        /*if(mRootCatId == "1") {
         }
         else{
             arrayListRecipe.add(new RecipeModel(101, 1,"Phở gái 1", "Food", "bla","bla","http://hot24h.org/wp-content/uploads/2017/12/hinh-gai-de-thuong.jpg","",0));
         }*/
-        mRootCatId = "1";
-        loadRetrofit();
-        //arrayListRecipe.add(new RecipeModel("101", "1", "Phở gái 1", "Food", "bla", "bla", "http://hot24h.org/wp-content/uploads/2017/12/hinh-gai-de-thuong.jpg", "", "0"));
-        //arrayListRecipe.add(new RecipeModel("102", "2", "Phở gái 2, Phở gái 2 Phở gái 2", "Drink", "bla", "blo", "http://i.imgur.com/DvpvklR.png", "", "0"));
+
+        //arrayListRecipe.add(new RecipeModel("101", "1","Phở gái 1", "Food", "bla", "bla", "http://hot24h.org/wp-content/uploads/2017/12/hinh-gai-de-thuong.jpg","",""));
+        //arrayListRecipe.add(new RecipeModel("102","2", "Phở gái 2, Phở gái 2 Phở gái 2", "Drink", "bla", "blo", "http://i.imgur.com/DvpvklR.png","",""));
         /*GetDataFromWeb getDataFromWeb = new GetDataFromWeb(mRootContext);
         arrayListRecipe = getDataFromWeb.getRecipeModelArrayList();*/
+        recipeListAdapter = new RecipeListAdapter(mRootView.getContext(), R.layout.list_food_for_week, arrayListRecipe);
         mRecyclerListRecipe.setAdapter(recipeListAdapter);
         recipeListAdapter.notifyDataSetChanged();
     }
@@ -175,29 +176,27 @@ public class RecipeListFragment extends Fragment {
         callback.enqueue(new Callback<List<RecipeModel>>() {
             @Override
             public void onResponse(Call<List<RecipeModel>> call, Response<List<RecipeModel>> response) {
-                arrayListRecipe = (ArrayList<RecipeModel>) response.body();
-                /*if (recipeArrayList.size() > 0) {
-                    for (int i = 0; i < 5; i++) {
-                        arrayListRecipe.add(new RecipeModel(
-                                recipeArrayList.get(i).getId(),
-                                recipeArrayList.get(i).getCatId(),
-                                recipeArrayList.get(i).getName(),
-                                recipeArrayList.get(i).getIntro(),
-                                recipeArrayList.get(i).getIngredient(),
-                                recipeArrayList.get(i).getInstruction(),
-                                recipeArrayList.get(i).getImage(),
-                                recipeArrayList.get(i).getLink(),
-                                recipeArrayList.get(i).getFavorite()
-                        ));
-                        Logcat.d(recipeArrayList.get(i).getName());
-                    }
+                ArrayList<RecipeModel> recipeArrayList = (ArrayList<RecipeModel>) response.body();
+                if (recipeArrayList.size() > 0) {
+                    String id, name, intro, ingredient, instruction, image;
+                    for (int i = 0; i < recipeArrayList.size(); i++) {
+                        id = recipeArrayList.get(i).getId();
+                        name = recipeArrayList.get(i).getName();
+                        intro = recipeArrayList.get(i).getIntro();
 
-                }*/
+                        ingredient = recipeArrayList.get(i).getIngredient().toString();
+
+                        instruction = recipeArrayList.get(i).getInstruction();
+                        image = recipeArrayList.get(i).getImage();
+                        arrayListRecipe.add(new RecipeModel(id, "1", name, intro, ingredient, instruction, image, "", ""));
+                    }
+                }
+                bindData();
             }
 
             @Override
             public void onFailure(Call<List<RecipeModel>> call, Throwable t) {
-                CheckUtil.createToast(mRootContext, "Error get data");
+                Snackbar.make(mRootView, R.string.error_load_data_retrofit, Snackbar.LENGTH_LONG);
             }
         });
     }

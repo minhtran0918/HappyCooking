@@ -17,7 +17,7 @@ public class LoadingScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_screen);
         referencedComponent();
-        int mTimeRun = 750, mTimeAll = 1000;
+        int mTimeRun = 400, mTimeAll = 750;
         mCountDownTimer = new CountDownTimer(mTimeAll, mTimeRun) {
             @Override
             public void onTick(long millisUntilFinished) {

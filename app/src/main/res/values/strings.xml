@@ -9,6 +9,8 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">All Recipes</string>
 
+    <string name="error_load_data_retrofit">Please check your connection!</string>
+
     <string name="nav_title_all_recipe">All Recipe</string>
     <string name="nav_title_favorite">Favorite</string>
 

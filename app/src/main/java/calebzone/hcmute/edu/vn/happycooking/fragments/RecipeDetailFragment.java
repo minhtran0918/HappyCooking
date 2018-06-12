@@ -67,10 +67,9 @@ public class RecipeDetailFragment extends Fragment {
         txtIntroRecipe.setText(mRecipeRoot.getIntro());
         txtIngredentsRecipe.setText(mRecipeRoot.getIngredient().toString());
 
-        String noidung = "1.abcdefgh\n" + "2.abcdefgh 3.abcdefgh 4.abcdefgh";
+/*        String noidung = "1.abcdefgh\n" + "2.abcdefgh 3.abcdefgh 4.abcdefgh";
         SpannableString noidungspanned = new SpannableString(noidung);
-        String bla = mRecipeRoot.getInstruction().toString();
-
+        String bla = mRecipeRoot.getInstruction().toString();*/
         txtInstructionRecipe.setText(mRecipeRoot.getInstruction());
     }
 

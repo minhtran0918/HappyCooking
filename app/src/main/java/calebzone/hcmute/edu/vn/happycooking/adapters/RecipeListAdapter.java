@@ -60,7 +60,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         holder.setOnItemClickListener(new RecipeViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                long id = Long.getLong(recipeList.get(position).getId());
+                //int id = Integer.getInteger(recipeList.get(position).getId());
                 /*Toast.makeText(currentContext, foodList.get(position).getTitle() + " id: " + foodList.get(position).getId(), Toast.LENGTH_SHORT).show();
                 RecipeListFragment recipeListFragment = new RecipeListFragment();
                 recipeListFragment.startRecipeDetailActivity(view,id);*/

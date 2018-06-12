@@ -30,7 +30,7 @@ public class RecipeModel implements Serializable {
     private String intro;
     @SerializedName("ingredient")
     @Expose
-    private String ingredient;
+    private Object ingredient;
     @SerializedName("instruction")
     @Expose
     private String instruction;
@@ -39,7 +39,7 @@ public class RecipeModel implements Serializable {
     private String image;
     @SerializedName("link")
     @Expose
-    private String link;
+    private Object link;
     @SerializedName("favorite")
     @Expose
     private String favorite;
@@ -88,11 +88,14 @@ public class RecipeModel implements Serializable {
         this.intro = intro;
     }
 
-    public String getIngredient() {
+    public Object getIngredient() {
+        if (ingredient == null) {
+            ingredient = "";
+        }
         return ingredient;
     }
 
-    public void setIngredient(String ingredient) {
+    public void setIngredient(Object ingredient) {
         this.ingredient = ingredient;
     }
 
@@ -112,11 +115,11 @@ public class RecipeModel implements Serializable {
         this.image = image;
     }
 
-    public String getLink() {
+    public Object getLink() {
         return link;
     }
 
-    public void setLink(String link) {
+    public void setLink(Object link) {
         this.link = link;
     }
 

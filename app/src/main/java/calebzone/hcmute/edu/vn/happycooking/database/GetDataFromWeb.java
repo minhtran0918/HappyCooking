@@ -44,10 +44,10 @@ public class GetDataFromWeb {
 
     public GetDataFromWeb(Context mRootContext) {
         this.mRootContext = mRootContext;
-        readDataByCat();
+        //readDataByCat();
     }
 
-    public void readData(String url, final ArrayList<RecipeModel> recipeModelArrayList) {
+    /*public void readData(String url, final ArrayList<RecipeModel> recipeModelArrayList) {
         RequestQueue requestQueue = Volley.newRequestQueue(mRootContext);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -57,14 +57,11 @@ public class GetDataFromWeb {
                         JSONObject object = response.getJSONObject(i);
                         recipeModelArrayList.add(new RecipeModel(
                                 object.getString(RecipeModel.COLUMN_ID),
-                                object.getString(RecipeModel.COLUMN_CATEGORY_ID),
                                 object.getString(RecipeModel.COLUMN_NAME),
                                 object.getString(RecipeModel.COLUMN_INTRO),
                                 object.getString(RecipeModel.COLUMN_INGREDIENT),
                                 object.getString(RecipeModel.COLUMN_INSTRUCTION),
-                                object.getString(RecipeModel.COLUMN_IMAGE),
-                                object.getString(RecipeModel.COLUMN_LINK),
-                                object.getString(RecipeModel.COLUMN_FAVORITE)
+                                object.getString(RecipeModel.COLUMN_IMAGE)
                         ));
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -78,9 +75,9 @@ public class GetDataFromWeb {
             }
         });
         requestQueue.add(jsonArrayRequest);
-    }
+    }*/
 
-    public void readDataByCat() {
+  /*  public void readDataByCat() {
         recipeModelArrayList = new ArrayList<RecipeModel>();
         String url = ROOT;
         RequestQueue requestQueue = Volley.newRequestQueue(mRootContext);
@@ -113,5 +110,5 @@ public class GetDataFromWeb {
             }
         });
         requestQueue.add(jsonArrayRequest);
-    }
+    }*/
 }

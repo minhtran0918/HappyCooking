@@ -88,5 +88,19 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginBottom="@dimen/card_margin"
+            android:layout_marginLeft="@dimen/card_margin"
+            android:layout_marginRight="@dimen/card_margin">
+
+            <com.google.android.youtube.player.YouTubePlayerView
+                android:id="@+id/fragment_recipe_detail_player_video"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></com.google.android.youtube.player.YouTubePlayerView>
+
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 </FrameLayout>
