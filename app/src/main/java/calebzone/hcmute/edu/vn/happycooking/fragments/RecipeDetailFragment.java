@@ -1,45 +1,26 @@
 package calebzone.hcmute.edu.vn.happycooking.fragments;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.share.model.ShareContent;
 import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.model.SharePhoto;
-import com.facebook.share.model.SharePhotoContent;
-import com.facebook.share.model.ShareVideo;
-import com.facebook.share.model.ShareVideoContent;
-import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
-import com.squareup.picasso.Picasso;
 
-import java.util.Calendar;
-
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.CheckUtil;
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.Logcat;
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.My;
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.WrapTextViewFilter;
+import calebzone.hcmute.edu.vn.happycooking.MyUtility.Me;
 import calebzone.hcmute.edu.vn.happycooking.R;
-import calebzone.hcmute.edu.vn.happycooking.activity.HomeActivity;
 import calebzone.hcmute.edu.vn.happycooking.activity.RecipeDetailActivity;
 import calebzone.hcmute.edu.vn.happycooking.database.model.RecipeModel;
 
@@ -85,7 +66,7 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     private void shareFB() {
-        Uri videoFileUri = Uri.parse(My.URL_YOUTUBE + mRecipeRoot.getLink().toString());
+        Uri videoFileUri = Uri.parse(Me.URL_YOUTUBE + mRecipeRoot.getLink().toString());
         ShareDialog shareDialog = new ShareDialog((Activity) mRootContext);
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentUrl(videoFileUri)

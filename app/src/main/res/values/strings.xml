@@ -24,6 +24,7 @@
     <string name="nav_title_cook_with_sauce">Món kho</string>
     <string name="nav_title_stir_fry">Món xào</string>
     <string name="nav_title_smoothies">Sinh tố, giải khát</string>
+    <string name="nav_title_login">Login</string>
 
     <string name="menu_rate">Rate</string>
     <string name="menu_share">Share</string>
@@ -38,6 +39,9 @@
     <string name="fragment_recipe_detail_intro_title">Intro</string>
     <string name="fragment_recipe_detail_ingredients_title">Ingredients</string>
     <string name="fragment_recipe_detail_instruction_title">Instruction</string>
+    <string name="fragment_recipe_detail_mess_favorite_select">Add recipe into favorite</string>
+    <string name="fragment_recipe_detail_mess_favorite_unselect">Remove from favorites</string>
 
     <string name="facebook_app_id">237123983719406</string>
+    <string name="fb_login_protocol_scheme">fb237123983719406</string>
 </resources>

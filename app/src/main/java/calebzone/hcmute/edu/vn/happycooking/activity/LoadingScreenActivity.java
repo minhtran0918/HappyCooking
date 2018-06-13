@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
+import calebzone.hcmute.edu.vn.happycooking.MyUtility.Me;
 import calebzone.hcmute.edu.vn.happycooking.R;
 
 public class LoadingScreenActivity extends AppCompatActivity {
 
     CountDownTimer mCountDownTimer;
     ProgressBar mProgressBarCircle, mProgressBarLine;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,11 @@ public class LoadingScreenActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }.start();
+        Me.setmRootSharedPreferences(getApplicationContext());
+        Me.mRootEditSharedPreferences.clear();
+        Me.mRootEditSharedPreferences.commit();
+        Me.addFavorite(1);
+        Me.addFavorite(2);
     }
 
     //region Referenced Component

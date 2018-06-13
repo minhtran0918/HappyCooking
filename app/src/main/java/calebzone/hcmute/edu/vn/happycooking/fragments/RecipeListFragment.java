@@ -1,12 +1,10 @@
 package calebzone.hcmute.edu.vn.happycooking.fragments;
 
 
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,29 +12,20 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.CheckUtil;
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.Logcat;
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.My;
+import calebzone.hcmute.edu.vn.happycooking.MyUtility.Me;
 import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.activity.HomeActivity;
-import calebzone.hcmute.edu.vn.happycooking.activity.RecipeDetailActivity;
 import calebzone.hcmute.edu.vn.happycooking.adapters.RecipeListAdapter;
-import calebzone.hcmute.edu.vn.happycooking.database.GetDataFromWeb;
 import calebzone.hcmute.edu.vn.happycooking.database.model.RecipeModel;
 import calebzone.hcmute.edu.vn.happycooking.database.retrofit.APIUtils;
 import calebzone.hcmute.edu.vn.happycooking.database.retrofit.DataClient;
@@ -54,6 +43,8 @@ public class RecipeListFragment extends Fragment {
     private String mRootCatId;
     private YouTubePlayerView mRootYoutube;
     public RecipeListAdapter recipeListAdapter;
+    public Boolean checkLoadFavorite = false;
+    public Boolean checkRunFirst = true;
 
     public RecipeListAdapter getRecipeListAdapter() {
         return recipeListAdapter;
@@ -84,6 +75,25 @@ public class RecipeListFragment extends Fragment {
         loadRetrofit();
     }
 
+    @Override
+    public void onResume() {
+        if (!checkRunFirst) {
+            if (checkLoadFavorite) {
+                for (Iterator<RecipeModel> it = arrayListRecipe.iterator(); it.hasNext(); ) {
+                    RecipeModel in = it.next();
+                    if (!Me.checkFavorite(Integer.valueOf(in.getId()))) {
+                        it.remove();
+                    }
+                }
+                //Toast.makeText(mRootContext, "Run", Toast.LENGTH_SHORT).show();
+                recipeListAdapter.notifyDataSetChanged();
+            }
+        } else {
+            checkRunFirst = false;
+        }
+        super.onResume();
+    }
+
     private void bindData() {
 
 
@@ -107,6 +117,10 @@ public class RecipeListFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             mRootCatId = bundle.getString(HomeActivity.EXTRA_CAT_ID);
+            if (mRootCatId == "-1") {
+                mRootCatId = "0";
+                checkLoadFavorite = true;
+            }
         }
     }
 
@@ -159,16 +173,21 @@ public class RecipeListFragment extends Fragment {
             public void onResponse(Call<List<RecipeModel>> call, Response<List<RecipeModel>> response) {
                 ArrayList<RecipeModel> recipeArrayList = (ArrayList<RecipeModel>) response.body();
                 if (recipeArrayList.size() > 0) {
-                    String id, name, intro, ingredient, instruction, image, link;
+                    String id, cat_id, name, intro, ingredient, instruction, image, link, favorite;
                     for (int i = 0; i < recipeArrayList.size(); i++) {
                         id = recipeArrayList.get(i).getId();
+                        if (checkLoadFavorite && !Me.checkFavorite(Integer.valueOf(id))) {
+                            continue;
+                        }
+                        cat_id = recipeArrayList.get(i).getCatId();
                         name = recipeArrayList.get(i).getName();
                         intro = recipeArrayList.get(i).getIntro();
                         ingredient = recipeArrayList.get(i).getIngredient().toString();
                         instruction = recipeArrayList.get(i).getInstruction();
                         image = recipeArrayList.get(i).getImage();
                         link = recipeArrayList.get(i).getLink().toString();
-                        arrayListRecipe.add(new RecipeModel(id, "1", name, intro, ingredient, instruction, image, link, ""));
+                        favorite = recipeArrayList.get(i).getFavorite();
+                        arrayListRecipe.add(new RecipeModel(id, cat_id, name, intro, ingredient, instruction, image, link, favorite));
                     }
                 }
                 recipeListAdapter = new RecipeListAdapter(mRootView.getContext(), R.layout.list_food_for_week, arrayListRecipe);
@@ -178,7 +197,7 @@ public class RecipeListFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<RecipeModel>> call, Throwable t) {
-                Snackbar.make(mRootView, R.string.error_load_data_retrofit, Snackbar.LENGTH_LONG);
+                Toast.makeText(mRootContext, R.string.error_load_data_retrofit, Toast.LENGTH_LONG).show();
             }
         });
     }

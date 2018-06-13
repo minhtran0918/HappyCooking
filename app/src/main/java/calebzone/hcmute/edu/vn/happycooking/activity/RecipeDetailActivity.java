@@ -1,29 +1,27 @@
 package calebzone.hcmute.edu.vn.happycooking.activity;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.Logcat;
-import calebzone.hcmute.edu.vn.happycooking.MyUtility.My;
+import calebzone.hcmute.edu.vn.happycooking.MyUtility.Me;
 import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.database.model.RecipeModel;
 import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeDetailFragment;
@@ -34,6 +32,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
     public static final String EXTRA_RECIPE_BUNDLE = "bla_bla";
     private RecipeModel mRecipeRoot;
     private RecipeDetailFragment mFragmentRoot;
+    private Boolean mCheckFavorite = false;
+    private Boolean mCheckFavoriteDefaul;
 
     private YouTubePlayerSupportFragment youTubePlayerFragment;
     private YouTubePlayer youTubePlayer;
@@ -58,6 +58,40 @@ public class RecipeDetailActivity extends AppCompatActivity {
         bindData();
         loadFragment();
         initializeYoutubePlayer();
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_favorite_recipe);
+        if (Me.checkFavorite(Integer.valueOf(mRecipeRoot.getId()))) {
+            fab.setImageResource(R.drawable.ic_favorite_select);
+            mCheckFavorite = true;
+        }
+        mCheckFavoriteDefaul = mCheckFavorite;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String mess;
+                if (mCheckFavorite) {
+                    fab.setImageResource(R.drawable.ic_favorite_unselect);
+                    mCheckFavorite = false;
+                    mess = getApplicationContext().getResources().getString(R.string.fragment_recipe_detail_mess_favorite_unselect);
+                } else {
+                    fab.setImageResource(R.drawable.ic_favorite_select);
+                    mCheckFavorite = true;
+                    mess = getApplicationContext().getResources().getString(R.string.fragment_recipe_detail_mess_favorite_select);
+                }
+                Snackbar.make(view, mess, Snackbar.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        if (mCheckFavoriteDefaul != mCheckFavorite) {
+            if (mCheckFavorite) {
+                Me.addFavorite(Integer.valueOf(mRecipeRoot.getId()));
+            } else {
+                Me.removeFavorite(Integer.valueOf(mRecipeRoot.getId()));
+            }
+        }
+        super.onPause();
     }
 
     private void bindData() {
@@ -85,7 +119,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         if (youTubePlayerFragment == null)
             return;
 
-        youTubePlayerFragment.initialize(My.API_YOUTUBE, new YouTubePlayer.OnInitializedListener() {
+        youTubePlayerFragment.initialize(Me.API_YOUTUBE, new YouTubePlayer.OnInitializedListener() {
 
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
@@ -110,6 +144,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         });
     }
 
+
     private void getData() {
         Intent intent = getIntent();
         mRecipeRoot = (RecipeModel) intent.getSerializableExtra(EXTRA_RECIPE_ID);
@@ -126,7 +161,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     private void loadFragment() {
         //Config data
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         setBundleData();

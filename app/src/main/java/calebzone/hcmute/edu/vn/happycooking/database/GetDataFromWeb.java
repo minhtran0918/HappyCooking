@@ -48,7 +48,7 @@ public class GetDataFromWeb {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                CheckUtil.createToast(mRootContext, error.toString());
+                My.createToast(mRootContext, error.toString());
             }
         });
         requestQueue.add(jsonArrayRequest);
@@ -83,7 +83,7 @@ public class GetDataFromWeb {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                CheckUtil.createToast(mRootContext, error.toString());
+                My.createToast(mRootContext, error.toString());
             }
         });
         requestQueue.add(jsonArrayRequest);

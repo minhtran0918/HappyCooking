@@ -60,4 +60,12 @@
             android:icon="@drawable/ic_menu_nav_smothies"
             android:title="@string/nav_title_smoothies" />
     </group>
+    <group
+        android:id="@+id/navigation_drawer_group_three"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_menu_nav_login"
+            android:title="@string/nav_title_login" />
+    </group>
 </menu>

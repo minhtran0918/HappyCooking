@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_about_message"><![CDATA["Happy Cooking 1.0.0 <br />Developer by <a href="https://www.facebook.com/minhtran0918">MinhTran</a><br />Email: minhtran0918@gmail.com]]></string>
-    <string name="nav_header_desc">a</string>
     <string name="error_load_data_retrofit">Kiểm tra kết nối mạng!</string>
     <string name="nav_title_all_recipe">Tất cả công thức</string>
     <string name="nav_title_favorite">Món yêu thích</string>
@@ -16,4 +15,7 @@
     <string name="fragment_recipe_detail_intro_title">Giới thiệu</string>
     <string name="fragment_recipe_detail_ingredients_title">Nguyên liệu</string>
     <string name="fragment_recipe_detail_instruction_title">Hướng dẫn</string>
+    <string name="fragment_recipe_detail_mess_favorite_select">Đã thêm vào món yêu thích</string>
+    <string name="fragment_recipe_detail_mess_favorite_unselect">Đã xóa khỏi món yêu thích</string>
+    <string name="nav_title_login">Đăng nhập</string>
 </resources>

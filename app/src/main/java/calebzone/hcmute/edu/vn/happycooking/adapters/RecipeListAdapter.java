@@ -25,7 +25,6 @@ import calebzone.hcmute.edu.vn.happycooking.R;
 import calebzone.hcmute.edu.vn.happycooking.activity.RecipeDetailActivity;
 import calebzone.hcmute.edu.vn.happycooking.database.model.RecipeModel;
 import calebzone.hcmute.edu.vn.happycooking.fragments.RecipeListFragment;
-import calebzone.hcmute.edu.vn.happycooking.model.Food;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder> {
 

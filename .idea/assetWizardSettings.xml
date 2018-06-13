@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/places/ic_room_service_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_account_circle_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -66,9 +66,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="imageAsset" value="C:\recipe-book.png" />
-                                      <entry key="outputName" value="ic_menu_nav_suggest" />
+                                      <entry key="outputName" value="ic_menu_nav_login" />
                                       <entry key="themeColor" value="000000" />
                                     </map>
                                   </option>
@@ -118,7 +117,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_restaurant_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_favorite_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -128,8 +127,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="636363" />
-                            <entry key="outputName" value="ic_menu_nav_all_recipe" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_favorite_select" />
                             <entry key="sourceFile" value="C:\Users\minht" />
                           </map>
                         </option>
